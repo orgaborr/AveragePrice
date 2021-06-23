@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import javax.sound.midi.Soundbank;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -11,23 +13,27 @@ public class Main {
 		int entries = sc.nextInt();
 		sc.nextLine();
 		double[][] purchases = new double[entries][2];
-		System.out.println("enties is: " + entries);
 
 		int index = 0;
 		while(entries > 0) {
 			String input = sc.nextLine();
 			String[] nums = input.split(" ");
-			System.out.println("Nums are " + nums[0] + " and " + nums[1]);
 			purchases[index][0] = Double.parseDouble(nums[0]);
 			purchases[index][1] = Double.parseDouble(nums[1]);
 			index++;
 			entries--;
 		}
 		sc.close();
-
+		
+		double totalQuantity = 0.0;
+		double sum = 0.0;
 		for(int i=0; i<purchases.length; i++) {
-			System.out.println(purchases[i][0] + " for " + purchases[i][1] + " USD");
+			totalQuantity += purchases[i][0];
+			sum += purchases[i][0] * purchases[i][1];
 		}
-
+		
+		System.out.println("Quantity: " + totalQuantity);
+		System.out.println("Average price: " + (sum/totalQuantity) + " USD");
+		System.out.println("Total value: " + sum + " USD");
 	}
 }
